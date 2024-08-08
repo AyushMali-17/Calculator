@@ -3,13 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Basic Calculator</title>
+    <title>Advanced Calculator</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="calculator">
         <input type="text" id="display" disabled>
+        <input type="text" id="history" disabled>
         <div class="buttons">
+            <!-- Number Buttons -->
             <button class="btn" onclick="appendNumber('1')">1</button>
             <button class="btn" onclick="appendNumber('2')">2</button>
             <button class="btn" onclick="appendNumber('3')">3</button>
@@ -23,9 +25,14 @@
             <button class="btn" onclick="appendNumber('9')">9</button>
             <button class="btn" onclick="chooseOperation('*')">*</button>
             <button class="btn" onclick="appendNumber('0')">0</button>
+            <button class="btn" onclick="appendDecimal()">.</button>
             <button class="btn" onclick="clearDisplay()">C</button>
-            <button class="btn" onclick="compute()">=</button>
             <button class="btn" onclick="chooseOperation('/')">/</button>
+            <!-- Advanced Functions -->
+            <button class="btn" onclick="appendFunction('sqrt')">√</button>
+            <button class="btn" onclick="appendFunction('pow')">x²</button>
+            <button class="btn" onclick="appendFunction('log')">log</button>
+            <button class="btn" onclick="compute()">=</button>
         </div>
     </div>
     <script src="script.js"></script>

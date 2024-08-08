@@ -13,10 +13,10 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 200px;
+    width: 250px;
 }
 
-#display {
+#display, #history {
     width: 100%;
     height: 40px;
     font-size: 20px;
@@ -26,6 +26,15 @@ body {
     border: 1px solid #ddd;
     border-radius: 5px;
     box-sizing: border-box;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+#history {
+    height: 30px;
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
 }
 
 .buttons {
@@ -47,4 +56,17 @@ body {
 
 .btn:hover {
     background-color: #eaeaea;
+}
+
+.btn:active {
+    background-color: #ddd;
+}
+
+.btn.operator {
+    background-color: #f0a;
+    color: white;
+}
+
+.btn.operator:hover {
+    background-color: #e90;
 }

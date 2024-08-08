@@ -3,8 +3,17 @@ let previousOperand = '';
 let operation = null;
 
 function appendNumber(number) {
-    currentOperand += number;
-    updateDisplay();
+    if (currentOperand.length < 10) { // Limit input length
+        currentOperand += number;
+        updateDisplay();
+    }
+}
+
+function appendDecimal() {
+    if (!currentOperand.includes('.')) {
+        currentOperand += '.';
+        updateDisplay();
+    }
 }
 
 function chooseOperation(op) {
@@ -15,6 +24,7 @@ function chooseOperation(op) {
     operation = op;
     previousOperand = currentOperand;
     currentOperand = '';
+    updateDisplay();
 }
 
 function compute() {
@@ -35,6 +45,15 @@ function compute() {
         case '/':
             computation = prev / current;
             break;
+        case 'sqrt':
+            computation = Math.sqrt(current);
+            break;
+        case 'pow':
+            computation = Math.pow(current, 2);
+            break;
+        case 'log':
+            computation = Math.log10(current);
+            break;
         default:
             return;
     }
@@ -42,6 +61,7 @@ function compute() {
     operation = null;
     previousOperand = '';
     updateDisplay();
+    logHistory();
 }
 
 function clearDisplay() {
@@ -54,3 +74,29 @@ function clearDisplay() {
 function updateDisplay() {
     document.getElementById('display').value = currentOperand;
 }
+
+function logHistory() {
+    const history = document.getElementById('history');
+    history.value += `${previousOperand} ${operation} ${currentOperand} = ${currentOperand}\n`;
+}
+
+document.addEventListener('keydown', (event) => {
+    const key = event.key;
+    if (key >= '0' && key <= '9') {
+        appendNumber(key);
+    } else if (key === '+') {
+        chooseOperation('+');
+    } else if (key === '-') {
+        chooseOperation('-');
+    } else if (key === '*') {
+        chooseOperation('*');
+    } else if (key === '/') {
+        chooseOperation('/');
+    } else if (key === 'Enter') {
+        compute();
+    } else if (key === 'Backspace') {
+        clearDisplay();
+    } else if (key === '.') {
+        appendDecimal();
+    }
+});
