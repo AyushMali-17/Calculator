@@ -2,9 +2,10 @@ let currentOperand = '';
 let previousOperand = '';
 let operation = null;
 let historyVisible = false;
+const historyLog = [];
 
 function appendNumber(number) {
-    if (currentOperand.length < 10) { // Limit input length
+    if (currentOperand.length < 15) { // Limit input length
         currentOperand += number;
         updateDisplay();
     }
@@ -18,7 +19,7 @@ function appendDecimal() {
 }
 
 function chooseOperation(op) {
-    if (currentOperand === '') return;
+    if (currentOperand === '' && (op === '*' || op === '/')) return;
     if (previousOperand !== '') {
         compute();
     }
@@ -63,6 +64,7 @@ function compute() {
                 computation = Math.pow(current, 2);
                 break;
             case 'log':
+                if (current <= 0) throw new Error('Logarithm of non-positive number');
                 computation = Math.log10(current);
                 break;
             case 'sin':
@@ -75,25 +77,25 @@ function compute() {
                 computation = Math.tan(current * Math.PI / 180);
                 break;
             case 'fact':
+                if (current < 0 || current % 1 !== 0) throw new Error('Factorial of non-integer or negative number');
                 computation = factorial(current);
                 break;
             default:
-                throw new Error('Invalid operation');
+                return;
         }
-    } catch (e) {
-        alert(e.message);
-        return;
+        currentOperand = computation.toString();
+        historyLog.push(`${previousOperand} ${operation} ${current} = ${computation}`);
+        operation = null;
+        previousOperand = '';
+        updateDisplay();
+        updateHistory();
+    } catch (error) {
+        alert(error.message);
+        clearDisplay();
     }
-
-    currentOperand = computation.toString();
-    operation = null;
-    previousOperand = '';
-    updateDisplay();
-    logHistory();
 }
 
 function factorial(num) {
-    if (num < 0) return NaN;
     if (num === 0 || num === 1) return 1;
     return num * factorial(num - 1);
 }
@@ -109,25 +111,23 @@ function updateDisplay() {
     document.getElementById('display').value = currentOperand;
 }
 
-function logHistory() {
-    const history = document.getElementById('history');
-    history.value += `${previousOperand} ${operation} ${currentOperand} = ${currentOperand}\n`;
+function updateHistory() {
+    const historyElement = document.getElementById('history');
+    historyElement.value = historyLog.join('\n');
 }
 
 function toggleHistory() {
-    const history = document.getElementById('history');
     historyVisible = !historyVisible;
-    history.style.display = historyVisible ? 'block' : 'none';
+    document.getElementById('history').style.display = historyVisible ? 'block' : 'none';
 }
 
 function clearHistory() {
-    const history = document.getElementById('history');
-    history.value = '';
+    historyLog.length = 0;
+    updateHistory();
 }
 
 function toggleDarkMode() {
     document.body.classList.toggle('dark-mode');
-    document.querySelector('.calculator').classList.toggle('dark-mode');
 }
 
 document.addEventListener('keydown', (event) => {

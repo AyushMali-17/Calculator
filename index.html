@@ -8,41 +8,43 @@
 </head>
 <body>
     <div class="calculator">
-        <div class="header">
-            <button id="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button>
-        </div>
-        <input type="text" id="display" disabled>
-        <input type="text" id="history" disabled>
-        <div class="buttons">
+        <header class="calculator-header">
+            <button id="toggle-dark-mode" aria-label="Toggle Dark Mode" onclick="toggleDarkMode()">🌙</button>
+        </header>
+        <section class="calculator-display">
+            <input type="text" id="display" aria-label="Calculator Display" disabled>
+            <textarea id="history" aria-label="Calculation History" disabled></textarea>
+        </section>
+        <section class="calculator-buttons">
             <!-- Number Buttons -->
             <button class="btn" onclick="appendNumber('1')">1</button>
             <button class="btn" onclick="appendNumber('2')">2</button>
             <button class="btn" onclick="appendNumber('3')">3</button>
-            <button class="btn" onclick="chooseOperation('+')">+</button>
+            <button class="btn operator" onclick="chooseOperation('+')">+</button>
             <button class="btn" onclick="appendNumber('4')">4</button>
             <button class="btn" onclick="appendNumber('5')">5</button>
             <button class="btn" onclick="appendNumber('6')">6</button>
-            <button class="btn" onclick="chooseOperation('-')">-</button>
+            <button class="btn operator" onclick="chooseOperation('-')">-</button>
             <button class="btn" onclick="appendNumber('7')">7</button>
             <button class="btn" onclick="appendNumber('8')">8</button>
             <button class="btn" onclick="appendNumber('9')">9</button>
-            <button class="btn" onclick="chooseOperation('*')">*</button>
+            <button class="btn operator" onclick="chooseOperation('*')">*</button>
             <button class="btn" onclick="appendNumber('0')">0</button>
             <button class="btn" onclick="appendDecimal()">.</button>
             <button class="btn" onclick="clearDisplay()">C</button>
-            <button class="btn" onclick="chooseOperation('/')">/</button>
+            <button class="btn operator" onclick="chooseOperation('/')">/</button>
             <!-- Advanced Functions -->
-            <button class="btn" onclick="appendFunction('sqrt')">√</button>
-            <button class="btn" onclick="appendFunction('pow')">x²</button>
-            <button class="btn" onclick="appendFunction('log')">log</button>
-            <button class="btn" onclick="appendFunction('sin')">sin</button>
-            <button class="btn" onclick="appendFunction('cos')">cos</button>
-            <button class="btn" onclick="appendFunction('tan')">tan</button>
-            <button class="btn" onclick="appendFunction('fact')">!</button>
-            <button class="btn" onclick="compute()">=</button>
-            <button class="btn" onclick="toggleHistory()">History</button>
-            <button class="btn" onclick="clearHistory()">Clear History</button>
-        </div>
+            <button class="btn function" onclick="appendFunction('sqrt')">√</button>
+            <button class="btn function" onclick="appendFunction('pow')">x²</button>
+            <button class="btn function" onclick="appendFunction('log')">log</button>
+            <button class="btn function" onclick="appendFunction('sin')">sin</button>
+            <button class="btn function" onclick="appendFunction('cos')">cos</button>
+            <button class="btn function" onclick="appendFunction('tan')">tan</button>
+            <button class="btn function" onclick="appendFunction('fact')">!</button>
+            <button class="btn equals" onclick="compute()">=</button>
+            <button class="btn history-toggle" onclick="toggleHistory()">History</button>
+            <button class="btn history-clear" onclick="clearHistory()">Clear History</button>
+        </section>
     </div>
     <script src="script.js"></script>
 </body>
