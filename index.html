@@ -8,6 +8,9 @@
 </head>
 <body>
     <div class="calculator">
+        <div class="header">
+            <button id="toggle-dark-mode" onclick="toggleDarkMode()">🌙</button>
+        </div>
         <input type="text" id="display" disabled>
         <input type="text" id="history" disabled>
         <div class="buttons">
@@ -32,7 +35,13 @@
             <button class="btn" onclick="appendFunction('sqrt')">√</button>
             <button class="btn" onclick="appendFunction('pow')">x²</button>
             <button class="btn" onclick="appendFunction('log')">log</button>
+            <button class="btn" onclick="appendFunction('sin')">sin</button>
+            <button class="btn" onclick="appendFunction('cos')">cos</button>
+            <button class="btn" onclick="appendFunction('tan')">tan</button>
+            <button class="btn" onclick="appendFunction('fact')">!</button>
             <button class="btn" onclick="compute()">=</button>
+            <button class="btn" onclick="toggleHistory()">History</button>
+            <button class="btn" onclick="clearHistory()">Clear History</button>
         </div>
     </div>
     <script src="script.js"></script>
